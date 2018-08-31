@@ -14,7 +14,8 @@ import { SortableTableDirective } from './data-table/sortable-table.directive';
 
 import { OrderModule } from 'ngx-order-pipe'; // <- import OrderModule
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
-
+import {HttpModule} from "@angular/http";
+import {DataTableService} from "./data-table/data-table.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +24,7 @@ import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
     PropertyTableComponent,
     FilterComponentComponent,
     SortableTableDirective
+    
   ],
   imports: [
     BrowserModule,
@@ -33,10 +35,11 @@ import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
     MatSortModule,
     HttpClientModule,
     OrderModule, // <- import OrderModule
-    NgxPaginationModule
+    NgxPaginationModule,
+    HttpModule
 
   ],
-  providers: [PropertyService],
+  providers: [PropertyService, DataTableService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

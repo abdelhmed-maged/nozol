@@ -2,8 +2,11 @@ import {Component, HostListener, Input, OnDestroy, OnInit, ViewChild} from '@ang
 // import { MatPaginator, MatSort } from '@angular/material';
 import { DataTableDataSource } from './data-table-datasource';
 import { SortService } from "./sort-service.service";
-import {Subscription} from "rxjs/Rx";
 import { OrderPipe } from 'ngx-order-pipe';
+import { DataTableService } from"./data-table.service";
+import { Subscription } from 'rxjs/Rx';
+
+
 @Component({
   selector: 'data-table',
   templateUrl: './data-table.component.html',
@@ -14,9 +17,12 @@ export class DataTableComponent implements OnInit ,OnDestroy {
   order: string = 'owner';
 reverse= false;
   p: number = 1;
-
-  constructor(private sortService: SortService, private orderPipe: OrderPipe) {
-
+  public dataObj = [];
+  constructor(private sortService: SortService, 
+    private orderPipe: OrderPipe,
+  private dataTableService : DataTableService,
+  // private sub: Subscription
+) {
     this.sortedCollection = orderPipe.transform(this.dataObj, 'dataObj._id');
   }
   // @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -25,51 +31,51 @@ reverse= false;
   keyword = '';
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['_id', 'status', 'owner', 'createdAt', 'notes','bathroomNo', 'address'];
-  dataObj =
-    [
-      {
-        "status": "active",
-        "address": [
-          1,
-          2,
-          3
-        ],
-        "notes": [
-          "testing"
-        ],
-        "_id": "5b83cd9c278cd72de91bd877",
-        "owner": "Mona",
-        "createdAt": "2018-08-27T10:08:28.527Z"
-      },
-      {
-        "status": "active",
-        "address": [
-          1,
-          2,
-          3
-        ],
-        "notes": [
-          "testing"
-        ],
-        "_id": "5b8445a7fe02507394de28f4",
-        "owner": "Ahmed",
-        "createdAt": "2018-08-27T18:40:39.112Z"
-      },
-      {
-        "status": "Finished",
-        "address": [
-          1,
-          2,
-          3
-        ],
-        "notes": [
-          "testing"
-        ],
-        "_id": "5b8445a7fe02507394de28f4",
-        "owner": "B",
-        "createdAt": "2022-08-27T18:40:39.112Z"
-      }
-    ];
+  // dataObj =
+  //   [
+  //     {
+  //       "status": "active",
+  //       "address": [
+  //         1,
+  //         2,
+  //         3
+  //       ],
+  //       "notes": [
+  //         "testing"
+  //       ],
+  //       "_id": "5b83cd9c278cd72de91bd877",
+  //       "owner": "Mona",
+  //       "createdAt": "2018-08-27T10:08:28.527Z"
+  //     },
+  //     {
+  //       "status": "active",
+  //       "address": [
+  //         1,
+  //         2,
+  //         3
+  //       ],
+  //       "notes": [
+  //         "testing"
+  //       ],
+  //       "_id": "5b8445a7fe02507394de28f4",
+  //       "owner": "Ahmed",
+  //       "createdAt": "2018-08-27T18:40:39.112Z"
+  //     },
+  //     {
+  //       "status": "Finished",
+  //       "address": [
+  //         1,
+  //         2,
+  //         3
+  //       ],
+  //       "notes": [
+  //         "testing"
+  //       ],
+  //       "_id": "5b8445a7fe02507394de28f4",
+  //       "owner": "B",
+  //       "createdAt": "2022-08-27T18:40:39.112Z"
+  //     }
+  //   ];
 
 
 
@@ -77,9 +83,13 @@ reverse= false;
   ngOnInit() {
     // this.dataSource = new DataTableDataSource(this.paginator, this.sort);
     // console.log(this.dataSource);
-
-
-  }
+    // this.dataTableService
+    // .sub(
+    //     data => this.dataObj = data['values'].result; // console.log your data to make sure its returning the expected results
+    //     err => console.log(err);
+    //  );
+    this.dataTableService.getData().subscribe(data => this.dataObj = data);
+}
 
   setOrder(value: string) {
     if (this.order === value) {
