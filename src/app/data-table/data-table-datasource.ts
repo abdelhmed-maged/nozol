@@ -34,7 +34,7 @@ const EXAMPLE_DATA: DataTableItem[] = [
  */
 export class DataTableDataSource extends DataSource<DataTableItem> {
   data: DataTableItem[] = EXAMPLE_DATA;
-  
+
   constructor(private paginator: MatPaginator, private sort: MatSort) {
     super();
   }

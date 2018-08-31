@@ -9,12 +9,20 @@ import { DataTableComponent } from './data-table/data-table.component';
 import { PropertyService } from './services/property.service';
 //import { UsertableComponent } from './components/usertable/usertable.component';
 import { PropertyTableComponent } from './components/property-table/property-table.component';
+import { FilterComponentComponent } from './data-table/filter-component/filter-component.component';
+import { SortableTableDirective } from './data-table/sortable-table.directive';
+
+import { OrderModule } from 'ngx-order-pipe'; // <- import OrderModule
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+
 @NgModule({
   declarations: [
     AppComponent,
     DataTableComponent,
     //UsertableComponent,
-    PropertyTableComponent
+    PropertyTableComponent,
+    FilterComponentComponent,
+    SortableTableDirective
   ],
   imports: [
     BrowserModule,
@@ -23,7 +31,10 @@ import { PropertyTableComponent } from './components/property-table/property-tab
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    HttpClientModule
+    HttpClientModule,
+    OrderModule, // <- import OrderModule
+    NgxPaginationModule
+
   ],
   providers: [PropertyService],
   bootstrap: [AppComponent]
