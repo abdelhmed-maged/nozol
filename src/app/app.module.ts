@@ -16,6 +16,7 @@ import { OrderModule } from 'ngx-order-pipe'; // <- import OrderModule
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import {HttpModule} from "@angular/http";
 import {DataTableService} from "./data-table/data-table.service";
+import { BsDropdownModule } from 'ngx-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import {DataTableService} from "./data-table/data-table.service";
     HttpClientModule,
     OrderModule, // <- import OrderModule
     NgxPaginationModule,
-    HttpModule
+    HttpModule,
+    BsDropdownModule.forRoot()
 
   ],
   providers: [PropertyService, DataTableService],

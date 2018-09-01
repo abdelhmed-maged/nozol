@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import {DataSource} from '@angular/cdk/collections';
 import { Property } from '../../models/property.model';
+
 @Component({
   selector: 'app-property-table',
   templateUrl: './property-table.component.html',
@@ -15,6 +16,7 @@ export class PropertyTableComponent implements OnInit {
   constructor(private propertyService: PropertyService) { }
 
   ngOnInit() {
+   
   }
 
 }

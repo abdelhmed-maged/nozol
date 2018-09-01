@@ -16,7 +16,8 @@ export class PropertyService {
   // ];
   //
 
-  private serviceUrl = 'http://localhost:3000/property';
+  private serviceUrl = 'https://demo8594233.mockable.io';
+
   constructor(private http: HttpClient) { }
   getProperty(): Observable<Property[]> {
     return this.http.get<Property[]>(this.serviceUrl);

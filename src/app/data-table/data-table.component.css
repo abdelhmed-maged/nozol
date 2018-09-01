@@ -20,3 +20,23 @@ thead th span {
 thead th.active span {
   visibility: visible;
 }
+.nozol-dropdown-button{
+  border: 1px solid #dff0d8;
+  background-color: #dff0d8;
+   color: #3c763d;
+   padding: 8px 12px
+}
+.nozol-dropdown-shell{
+  position: relative;
+}
+.nozol-dropdown-shell > ul{
+  position: absolute;
+  border: 1px solid #d8d8d8;
+  background-color: #fff;
+  z-index: 2;
+  top: 30px;
+  left: 0;
+}
+.nozol-dropdown-shell > ul > li{
+list-style: none;
+}

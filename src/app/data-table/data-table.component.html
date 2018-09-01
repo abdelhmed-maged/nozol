@@ -29,18 +29,38 @@
       <span [hidden]="!reverse">▲</span></th>
     </thead>
     <tbody>
-    <tr *ngFor="let dataItems of dataObj | orderBy: order:reverse:'case-insensitive'
-    | paginate: { itemsPerPage: 10, currentPage: p }"  [hidden]="
-    dataItems.owner.toLowerCase().indexOf(keyword)== -1 && keyword != ''
-     &&  dataItems.createdAt.toLowerCase().indexOf(keyword)== -1 && keyword != ''
-     && dataItems.status.toLowerCase().indexOf(keyword)== -1 && keyword != '' ">
-      <td>{{dataItems._id}}</td>
-      <td>{{dataItems.status}}</td>
-      <td>{{dataItems.owner}}</td>
-      <td>{{dataItems.createdAt}}</td>
-      <td>{{dataItems.notes}}</td>
+<!-- 
+        <tr *ngFor="let dataItem of singleObject.data | orderBy: order:reverse:'case-insensitive'
+        | paginate: { itemsPerPage: 10, currentPage: p }"  [hidden]="
+        singleObject.data.owner.toLowerCase().indexOf(keyword)== -1 && keyword != ''
+         &&  singleObject.data.createdAt.toLowerCase().indexOf(keyword)== -1 && keyword != ''
+         && singleObject.data.status.toLowerCase().indexOf(keyword)== -1 && keyword != '' "> -->
 
-      <td>{{dataItems.address}}</td>
+    <tr *ngFor="let dataItem of singleObject.data | orderBy: order:reverse:'case-insensitive'
+    | paginate: { itemsPerPage: 2, currentPage: p }"
+    
+    [hidden]="
+    dataItem.owner.toLowerCase().indexOf(keyword)== -1
+         &&  dataItem.createdAt.toLowerCase().indexOf(keyword)== -1 && keyword != ''
+         && dataItem.status.toLowerCase().indexOf(keyword)== -1 && keyword != ''">
+      <td>{{dataItem._id}}</td>
+      <td>
+      <div class="btn-group" dropdown>
+          <button id="button-basic" dropdownToggle type="button" class="nozol-dropdown-button"
+                  aria-controls="dropdown-basic">
+                  {{dataItem.status}} <span class="caret"></span>
+          </button>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+              role="menu" aria-labelledby="button-basic">
+            <li role="menuitem"><a class="dropdown-item" href="#" (click)="onClickStatus(dataItem._id,'finished')">finished</a></li>
+            <li role="menuitem"><a class="dropdown-item" href="#"  (click)="onClickStatus(dataItem._id,'active')">7amada</a></li>
+          </ul>
+        </div>
+    </td>
+      <td>{{dataItem.owner}}</td>
+      <td>{{dataItem.createdAt}}</td>
+      <td>{{dataItem.notes}}</td>
+      <td>{{dataItem.address}}</td>
     </tr>
     </tbody>
   </table>
